@@ -10,27 +10,31 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const env = config.build.env
 
 var webpackConfig = merge(baseWebpackConfig,{
+  mode:'production',
   module:{
     rules:utils.styleLoaders({sourceMap:config.build.productionSourceMap, extract:true})
   },
   devtool:config.build.productionSourceMap?'#source-map':false,
   output:{
     path:config.build.assetsRoot,
-    filename:utils.assetsPath('js/[name].[chunkhask].js'),
+    filename:utils.assetsPath('js/[name].[chunkhash].js'),
     chunkFilename:utils.assetsPath('js/[id].[chunkhash].js')
+  },
+  optimization: {
+    splitChunks: {
+        cacheGroups: {
+            commons: {
+                name: "commons",
+                chunks: "initial",
+                minChunks: 2
+            }
+        }
+    },
+    minimizer: [new UglifyJsPlugin()],
   },
   plugins:[
     new webpack.DefinePlugin({
       'process.env':env
-    }),
-    new UglifyJsPlugin({
-      uglifyOptions: {
-        compress: {
-          warnings:false
-        }
-      },
-      sourceMap:config.build.productionSourceMap,
-      parallel:true
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new ExtractTextPlugin(utils.assetsPath('css/[name].[contenthash].css')),
@@ -44,20 +48,6 @@ var webpackConfig = merge(baseWebpackConfig,{
         removeAttributeQuotes:true
       },
       chunksSortMode:'dependency'
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name:'vendor',
-      minChunks:function(module, count){
-        return(
-          module.resource && /\.js$/.test(module.resource)&&module.resource.indexOf(
-            path.join(__dirname,'../node_modules')
-          ) === 0
-        )
-      }
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name:'manifest',
-      chunks:['vendor']
     })
   ]
 })
