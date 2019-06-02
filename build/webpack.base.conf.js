@@ -3,6 +3,7 @@ const config = require('../config')
 const utils = require('./utils')
 const projectRoot = path.resolve(__dirname, '../')
 const vueLoaderConfig = require('./vue-loader.conf')
+const VueLoaderConfig = require('vue-loader/lib/plugin')
 
 var env = process.env.NODE_ENV
 var cssSourceMapDev = (env === 'development' && config.dev.cssSourceMap)
@@ -32,8 +33,7 @@ module.exports = {
       {
         test: /\.vue$/,
         loader:'vue-loader',
-        include:/src/,
-        exclude:/node_modules/
+        options: vueLoaderConfig
       },
       {
         test: /\.js$/,
@@ -59,6 +59,9 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  plugins:[
+    new VueLoaderConfig()
+  ]
 }
 

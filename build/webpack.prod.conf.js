@@ -37,7 +37,7 @@ var webpackConfig = merge(baseWebpackConfig,{
       'process.env':env
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
-    new ExtractTextPlugin(utils.assetsPath('css/[name].[contenthash].css')),
+    new ExtractTextPlugin(utils.assetsPath('css/[name].[hash].css')),
     new HtmlWebpackPlugin({
       filename:path.resolve(__dirname,'../dist/index.html'),
       template:path.resolve(__dirname,'../src/index.html'),

@@ -8,6 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 
 module.exports = merge(baseWebpackConfig, {
+  mode:'development',
   module:{
     rules:utils.styleLoaders({sourceMap:config.dev.cssSourceMap})
   },
