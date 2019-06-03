@@ -4,15 +4,15 @@ const utils = require('./utils')
 const projectRoot = path.resolve(__dirname, '../')
 const vueLoaderConfig = require('./vue-loader.conf')
 const VueLoaderConfig = require('vue-loader/lib/plugin')
+const projectConfig = require('../config/project')
 
 var env = process.env.NODE_ENV
 var cssSourceMapDev = (env === 'development' && config.dev.cssSourceMap)
 var cssSourceMapProd = (env === 'production' && config.build.productionSourceMap)
 var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
-
 module.exports = {
   entry:{
-    app: './src/main.js'
+    app: path.resolve(__dirname,'../','src/'+projectConfig.name+'/main.js')
   },
   output:{
     path:config.build.assetsRoot,

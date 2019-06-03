@@ -3,12 +3,14 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+const projectConfig = require('../config/project')
 
 module.exports = {
+  project: projectConfig.name,
   dev: {
 
     // Paths
-    assetsSubDirectory: 'static',
+    assetsSubDirectory: projectConfig.name,
     assetsPublicPath: '/',
     proxyTable: {},
 
@@ -45,11 +47,11 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
-
+    index: path.resolve(__dirname, '../dist/'+projectConfig.name+'/index.html'),
+    template: path.resolve(__dirname, '../src/'+projectConfig.name+'/index.html'),
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
+    assetsSubDirectory: projectConfig.name,
     assetsPublicPath: '/',
 
     /**

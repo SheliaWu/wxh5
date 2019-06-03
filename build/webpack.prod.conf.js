@@ -4,6 +4,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const utils = require('./utils')
 const baseWebpackConfig = require('./webpack.base.conf')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
@@ -39,8 +40,8 @@ var webpackConfig = merge(baseWebpackConfig,{
     new webpack.optimize.OccurrenceOrderPlugin(),
     new ExtractTextPlugin(utils.assetsPath('css/[name].[hash].css')),
     new HtmlWebpackPlugin({
-      filename:path.resolve(__dirname,'../dist/index.html'),
-      template:path.resolve(__dirname,'../src/index.html'),
+      filename:config.build.index,
+      template:config.build.template,
       inject:true,
       minify:{
         removeComments:true,
@@ -48,7 +49,15 @@ var webpackConfig = merge(baseWebpackConfig,{
         removeAttributeQuotes:true
       },
       chunksSortMode:'dependency'
-    })
+    }),
+    // copy custom static assets
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../static/'+config.project),
+        to: config.build.assetsSubDirectory,
+        ignore: ['.*']
+      }
+    ])
   ]
 })
 

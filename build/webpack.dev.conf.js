@@ -4,10 +4,12 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const utils = require('./utils')
 const baseWebpackConfig = require('./webpack.base.conf')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
+const portfinder = require('portfinder')
 
-module.exports = merge(baseWebpackConfig, {
+const devWebpackConfig = merge(baseWebpackConfig, {
   mode:'development',
   module:{
     rules:utils.styleLoaders({sourceMap:config.dev.cssSourceMap})
@@ -36,11 +38,43 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
-      filename:path.resolve(__dirname,'../dist/index.html'),
-      template:path.resolve(__dirname,'../src/index.html'),
+      filename: path.resolve(__dirname, '../dist/'+config.dev.assetsSubDirectory+'/index.html'),
+      template: path.resolve(__dirname, '../src/'+config.dev.assetsSubDirectory+'/index.html'),
       inject:true
     }),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, '../static/'+config.dev.assetsSubDirectory),
+        to: config.dev.assetsSubDirectory,
+        ignore: ['.*']
+      }
+    ]),
     new FriendlyErrorsPlugin()
   ]
+})
+module.exports = new Promise((resolve, reject) => {
+  portfinder.basePort = process.env.PORT || config.dev.port
+  portfinder.getPort((err, port) => {
+    if (err) {
+      reject(err)
+    } else {
+      // publish the new Port, necessary for e2e tests
+      process.env.PORT = port
+      // add port to devServer config
+      devWebpackConfig.devServer.port = port
+
+      // Add FriendlyErrorsPlugin
+      devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
+        compilationSuccessInfo: {
+          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
+        },
+        onErrors: config.dev.notifyOnErrors
+        ? utils.createNotifierCallback()
+        : undefined
+      }))
+
+      resolve(devWebpackConfig)
+    }
+  })
 })
 
