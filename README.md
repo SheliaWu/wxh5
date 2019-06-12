@@ -1,13 +1,15 @@
-#wxh5
+#h5-projects
 > 针对h5搭建一个多项目应用的基础配置框架,并封装一些工具函数
 
 ## 开发环境和生产环境配置
-1.把webpack的配置分为基础配置，开发环境和生产环境
-2.基础配置配置路口和通用的module和plugin
+### build目录
+1.webpack配置有三个部分：基本配置，开发环境和生产环境
+2.基本配置配置路口和通用的module和plugin
 3.开发环境需要配置webpack-dev-server，热重载和错误提示和其他
 4.生产环境需要压缩js,提取css，优化html和开启gzip压缩
-5.配置文件同上，分为build和dev,例如打包的目录和其他
-6.配置package.json
+### config目录
+1.配置同上
+### 配置package.json
 
 ## 分项目打包
 1.通过在命令行中指定目录，打包src下指定目录的文件
