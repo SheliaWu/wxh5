@@ -1,6 +1,13 @@
+/*
+ * @Descripttion: 
+ * @version: 
+ * @Author: shelia
+ * @Date: 2020-08-27 16:49:13
+ * @LastEditors: shelia
+ * @LastEditTime: 2020-08-27 17:59:26
+ */
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/common/HelloWorld'
 
 Vue.use(Router)
 
@@ -8,8 +15,11 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'This is a test project!!!',
-      component: HelloWorld
+      component: () => import('../page/index')
+    },
+    {
+      path: '/more',
+      component: () => import('../page/more')
     }
   ]
 })

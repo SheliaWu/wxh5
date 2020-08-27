@@ -1,19 +1,30 @@
-#h5-projects
-> 针对h5搭建一个多项目应用的基础配置框架,并封装一些工具函数
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: shelia
+ * @Date: 2020-08-27 16:49:13
+ * @LastEditors: shelia
+ * @LastEditTime: 2020-08-27 17:48:44
+-->
+## multiple-spa
+![vue](https://img.shields.io/badge/-vue-brightgreen)
+![scss](https://img.shields.io/badge/-scss-brightgreen)
+![yarn](https://img.shields.io/badge/-yarn-brightgreen)
 
-## 开发环境和生产环境配置
+> 基于vue-cli3，提供一个多单页面应用开发的配置方案
 
-### build目录
-1. webpack配置有三个部分：基本配置，开发环境和生产环境
-2. 基本配置配置路口和通用的module和plugin
-3. 开发环境需要配置webpack-dev-server，热重载和错误提示和其他
-4. 生产环境需要压缩js,提取css，优化html和开启gzip压缩
+### 🚀 使用
+```bash
+yarn install
+yarn run dev (开发环境)
+yarn run build (生产环境)
+```
 
-### config目录
-1. 配置同上
+### 项目
 
-### 配置package.json
+#### 如何使用
+在`src/pages`目录下新建单页应用
 
-## 分项目打包
-1. 通过在命令行中指定目录，打包src下指定目录的文件
-2. 打包后的静态文件也分别打包在不同目录下
+##### 目录结构
+
+
