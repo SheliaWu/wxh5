@@ -4,14 +4,14 @@
  * @Author: shelia
  * @Date: 2020-08-27 16:49:13
  * @LastEditors: shelia
- * @LastEditTime: 2020-08-27 17:48:44
+ * @LastEditTime: 2020-08-27 18:24:50
 -->
 ## multiple-spa
 ![vue](https://img.shields.io/badge/-vue-brightgreen)
 ![scss](https://img.shields.io/badge/-scss-brightgreen)
 ![yarn](https://img.shields.io/badge/-yarn-brightgreen)
 
-> 基于vue-cli3，提供一个多单页面应用开发的配置方案
+> 基于vue-cli，提供一个多单页面应用开发的配置方案
 
 ### 🚀 使用
 ```bash
