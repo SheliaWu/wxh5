@@ -1,14 +1,22 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: shelia
+ * @Date: 2020-08-27 16:49:13
+ * @LastEditors: shelia
+ * @LastEditTime: 2020-08-28 15:16:07
+-->
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <h1>demo1</h1>
+    <div>Hello, welcome to demo1!</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
-}
+  name: 'App',
+};
 </script>
 
 <style>
